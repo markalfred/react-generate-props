@@ -1,0 +1,27 @@
+{
+  "name": "react-generate-props",
+  "version": "0.0.0",
+  "description": "Generate default props based on your React component's PropTypes",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markalfred/react-generate-props.git"
+  },
+  "keywords": [
+    "react",
+    "prop",
+    "props",
+    "proptypes",
+    "generate",
+    "generator"
+  ],
+  "author": "Mark Battersby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markalfred/react-generate-props/issues"
+  },
+  "homepage": "https://github.com/markalfred/react-generate-props#readme"
+}
