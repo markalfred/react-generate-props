@@ -1,5 +1,5 @@
 describe('test', function() {
   it('works', function() {
-    true.should.eq(true)
+    require('../index').should.eq(true)
   })
 })
