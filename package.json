@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Generate default props based on your React component's PropTypes",
   "main": "index.js",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.11",
