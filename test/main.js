@@ -394,4 +394,23 @@ describe('generateProps', () => {
       })
     })
   })
+
+  describe('given a required oneOfType', () => {
+    describe('bool or', () => {
+      describe('number', () => {
+        it('generates either a bool or a number', () => {
+          const propTypes = { myArrayOrBool: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.number]).isRequired }
+          ComponentAsClass.propTypes = propTypes
+          ComponentAsFunction.propTypes = propTypes
+
+          const expected = [true, 1]
+
+          generateProps(propTypes).myArrayOrBool.should.be.oneOf(expected)
+          generateProps({ propTypes }).myArrayOrBool.should.be.oneOf(expected)
+          generateProps(ComponentAsClass).myArrayOrBool.should.be.oneOf(expected)
+          generateProps(ComponentAsFunction).myArrayOrBool.should.be.oneOf(expected)
+        })
+      })
+    })
+  })
 })

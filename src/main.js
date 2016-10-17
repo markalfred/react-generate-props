@@ -49,11 +49,13 @@ const GENERATORS = {
   arrayOf: (type) => [generateOneProp(type)],
   instanceOf: (klass) => new klass(),
   objectOf: (type) => ({ key: generateOneProp(type) }),
-  oneOf: (values) => _.sample(values)
+  oneOf: (values) => _.sample(values),
+  oneOfType: (types) => generateOneProp(_.extend(_.sample(types), { forceGeneration: true }))
 }
 
 const shouldGenerate = (propType) => {
   return (
+    propType.forceGeneration ||
     // Generate required props, and this is the required version
     (options.required && !propType.isRequired) ||
     // Generate optional props, and this is the optional version
