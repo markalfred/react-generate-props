@@ -136,6 +136,21 @@ describe('generateProps', () => {
     })
   })
 
+  describe('given a required node', () => {
+    it('generates a node', () => {
+      const propTypes = { myNode: React.PropTypes.node.isRequired }
+      ComponentAsClass.propTypes = propTypes
+      ComponentAsFunction.propTypes = propTypes
+
+      const expected = { myNode: [React.createElement('div'), React.createElement('div')] }
+
+      generateProps(propTypes).should.deep.equal(expected)
+      generateProps({ propTypes }).should.deep.equal(expected)
+      generateProps(ComponentAsClass).should.deep.equal(expected)
+      generateProps(ComponentAsFunction).should.deep.equal(expected)
+    })
+  })
+
   describe('given a required arrayOf', () => {
     describe('required arrays', () => {
       it('generates an array of arrays', () => {

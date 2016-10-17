@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const React = require('react')
 const { PropTypes } = React
 
-const SIMPLE = ['array', 'bool', 'func', 'number', 'object', 'string', 'any', 'element']
+const SIMPLE = ['array', 'bool', 'func', 'number', 'object', 'string', 'any', 'element', 'node']
 const COMPLEX = ['arrayOf']
 
 // TODO: Options API
@@ -44,6 +44,7 @@ const GENERATORS = {
   string: () => 'A String',
   any: () => 'Any',
   element: () => React.createElement('div'),
+  node: () => [React.createElement('div'), React.createElement('div')],
 
   // Complex types
   arrayOf: (type) => [generateOneProp(type)]
