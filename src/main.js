@@ -3,9 +3,6 @@ const sinon = require('sinon')
 const React = require('react')
 const { PropTypes } = React
 
-const SIMPLE = ['array', 'bool', 'func', 'number', 'object', 'string', 'any', 'element', 'node']
-const COMPLEX = ['arrayOf', 'instanceOf']
-
 // TODO: Options API
 const options = {
   required: true
@@ -19,17 +16,19 @@ const wrapPropTypes = () => {
 
   const original = _.cloneDeep(PropTypes)
 
-  _.each(SIMPLE, (k) =>
-    _.defaultsDeep(PropTypes[k], { type: k, isRequired: { type: k } })
-  )
-
-  _.each(COMPLEX, (k) =>
-    PropTypes[k] = (arg) =>
-      _.defaultsDeep(original[k](arg), {
-        type: k, arg: arg,
-        isRequired: { type: k, arg: arg }
-      })
-  )
+  _.each(PropTypes, (v, k) => {
+    if (v.isRequired !== undefined) {
+      // Simple type. Just extend the object
+      _.defaultsDeep(PropTypes[k], { type: k, isRequired: { type: k } })
+    } else {
+      // Complex type. Must extend the creator's return value
+      PropTypes[k] = (arg) =>
+        _.defaultsDeep(original[k](arg), {
+          type: k, arg: arg,
+          isRequired: { type: k, arg: arg }
+        })
+    }
+  })
 }
 
 wrapPropTypes()
