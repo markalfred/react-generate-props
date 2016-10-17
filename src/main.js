@@ -4,7 +4,7 @@ const React = require('react')
 const { PropTypes } = React
 
 const SIMPLE = ['array', 'bool', 'func', 'number', 'object', 'string', 'any', 'element', 'node']
-const COMPLEX = ['arrayOf']
+const COMPLEX = ['arrayOf', 'instanceOf']
 
 // TODO: Options API
 const options = {
@@ -47,7 +47,8 @@ const GENERATORS = {
   node: () => [React.createElement('div'), React.createElement('div')],
 
   // Complex types
-  arrayOf: (type) => [generateOneProp(type)]
+  arrayOf: (type) => [generateOneProp(type)],
+  instanceOf: (klass) => new klass()
 }
 
 const shouldGenerate = (propType) => {

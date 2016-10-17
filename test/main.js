@@ -255,4 +255,21 @@ describe('generateProps', () => {
       })
     })
   })
+
+  describe('given a required instanceOf(MyClass)', () => {
+    it('generates a an instance of MyClass', () => {
+      class MyClass {}
+
+      const propTypes = { myInstance: React.PropTypes.instanceOf(MyClass).isRequired }
+      ComponentAsClass.propTypes = propTypes
+      ComponentAsFunction.propTypes = propTypes
+
+      const expected = { myInstance: new MyClass() }
+
+      generateProps(propTypes).should.deep.equal(expected)
+      generateProps({ propTypes }).should.deep.equal(expected)
+      generateProps(ComponentAsClass).should.deep.equal(expected)
+      generateProps(ComponentAsFunction).should.deep.equal(expected)
+    })
+  })
 })
