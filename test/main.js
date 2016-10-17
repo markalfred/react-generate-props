@@ -272,4 +272,109 @@ describe('generateProps', () => {
       generateProps(ComponentAsFunction).should.deep.equal(expected)
     })
   })
+
+  describe('given a required objectOf', () => {
+    describe('required arrays', () => {
+      it('generates an array of arrays', () => {
+        const propTypes = { myObjectOfArrays: React.PropTypes.objectOf(React.PropTypes.array.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myObjectOfArrays: { key: [] } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+    })
+
+    describe('required bools', () => {
+      it('generates an array of bools', () => {
+        const propTypes = { myObjectOfBools: React.PropTypes.objectOf(React.PropTypes.bool.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myObjectOfBools: { key: true } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+    })
+
+    describe('required funcs', () => {
+      it('generates an array of funcs', () => {
+        const propTypes = { myObjectOfFuncs: React.PropTypes.objectOf(React.PropTypes.func.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        generateProps(propTypes).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
+        generateProps({ propTypes }).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
+        generateProps(ComponentAsClass).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
+        generateProps(ComponentAsFunction).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
+      })
+    })
+
+    describe('required numbers', () => {
+      it('generates an array of numbers', () => {
+        const propTypes = { myObjectOfNumbers: React.PropTypes.objectOf(React.PropTypes.number.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myObjectOfNumbers: { key: 1 } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+    })
+
+    describe('required objects', () => {
+      it('generates an array of objects', () => {
+        const propTypes = { myObjectOfObjects: React.PropTypes.objectOf(React.PropTypes.object.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myObjectOfObjects: { key: {} } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+    })
+
+    describe('required strings', () => {
+      it('generates an array of strings', () => {
+        const propTypes = { myObjectOfStrings: React.PropTypes.objectOf(React.PropTypes.string.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myObjectOfStrings: { key: 'A String' } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+    })
+
+    describe('required anys', () => {
+      it('generates an array of anys', () => {
+        const propTypes = { myObjectOfAnys: React.PropTypes.objectOf(React.PropTypes.any.isRequired).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myObjectOfAnys: { key: 'Any' } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+    })
+  })
 })

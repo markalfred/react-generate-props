@@ -47,7 +47,8 @@ const GENERATORS = {
 
   // Complex types
   arrayOf: (type) => [generateOneProp(type)],
-  instanceOf: (klass) => new klass()
+  instanceOf: (klass) => new klass(),
+  objectOf: (type) => ({ key: generateOneProp(type) })
 }
 
 const shouldGenerate = (propType) => {
