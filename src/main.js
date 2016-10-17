@@ -1,8 +1,9 @@
 const _ = require('lodash')
 const sinon = require('sinon')
-const { PropTypes } = require('react')
+const React = require('react')
+const { PropTypes } = React
 
-const SIMPLE = ['array', 'bool', 'func', 'number', 'object', 'string', 'any']
+const SIMPLE = ['array', 'bool', 'func', 'number', 'object', 'string', 'any', 'element']
 const COMPLEX = ['arrayOf']
 
 // TODO: Options API
@@ -42,6 +43,7 @@ const GENERATORS = {
   object: () => ({}),
   string: () => 'A String',
   any: () => 'Any',
+  element: () => React.createElement('div'),
 
   // Complex types
   arrayOf: (type) => [generateOneProp(type)]
