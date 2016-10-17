@@ -377,4 +377,21 @@ describe('generateProps', () => {
       })
     })
   })
+
+  describe('given a required oneOf', () => {
+    describe('foo or bar', () => {
+      it('generates either foo or bar', () => {
+        const propTypes = { myFooOrBar: React.PropTypes.oneOf(['foo', 'bar']).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = ['foo', 'bar']
+
+        generateProps(propTypes).myFooOrBar.should.be.oneOf(expected)
+        generateProps({ propTypes }).myFooOrBar.should.be.oneOf(expected)
+        generateProps(ComponentAsClass).myFooOrBar.should.be.oneOf(expected)
+        generateProps(ComponentAsFunction).myFooOrBar.should.be.oneOf(expected)
+      })
+    })
+  })
 })
