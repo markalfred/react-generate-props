@@ -413,4 +413,65 @@ describe('generateProps', () => {
       })
     })
   })
+
+  describe('given a required shape', () => {
+    describe('with a required array value', () => {
+      it('generates an object with an array value', () => {
+        const propTypes = { myShape: React.PropTypes.shape({ myArray: React.PropTypes.array.isRequired }).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myShape: { myArray: [] } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+      })
+
+      describe('and a required bool', () => {
+        it('generates an object with an array value and a bool value', () => {
+          const propTypes = {
+            myShape: React.PropTypes.shape({
+              myArray: React.PropTypes.array.isRequired,
+              myBool: React.PropTypes.bool.isRequired
+            }).isRequired
+          }
+          ComponentAsClass.propTypes = propTypes
+          ComponentAsFunction.propTypes = propTypes
+
+          const expected = { myShape: { myArray: [], myBool: true } }
+
+          generateProps(propTypes).should.deep.equal(expected)
+          generateProps({ propTypes }).should.deep.equal(expected)
+          generateProps(ComponentAsClass).should.deep.equal(expected)
+          generateProps(ComponentAsFunction).should.deep.equal(expected)
+        })
+      })
+
+      describe('and a required shape', () => {
+        describe('with a required number', () => {
+          it('generates an object with an array value and a sub-object with bool value', () => {
+            const propTypes = {
+              myShape: React.PropTypes.shape({
+                myArray: React.PropTypes.array.isRequired,
+                mySubShape: React.PropTypes.shape({
+                  myNumber: React.PropTypes.number.isRequired
+                }).isRequired
+              }).isRequired
+            }
+            ComponentAsClass.propTypes = propTypes
+            ComponentAsFunction.propTypes = propTypes
+
+            const expected = { myShape: { myArray: [], mySubShape: { myNumber: 1 } } }
+
+            generateProps(propTypes).should.deep.equal(expected)
+            generateProps({ propTypes }).should.deep.equal(expected)
+            generateProps(ComponentAsClass).should.deep.equal(expected)
+            generateProps(ComponentAsFunction).should.deep.equal(expected)
+          })
+        })
+      })
+    })
+  })
 })

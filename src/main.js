@@ -50,7 +50,8 @@ const GENERATORS = {
   instanceOf: (klass) => new klass(),
   objectOf: (type) => ({ key: generateOneProp(type) }),
   oneOf: (values) => _.sample(values),
-  oneOfType: (types) => generateOneProp(_.extend(_.sample(types), { forceGeneration: true }))
+  oneOfType: (types) => generateOneProp(_.extend(_.sample(types), { forceGeneration: true })),
+  shape: (shape) => generateProps(shape)
 }
 
 const shouldGenerate = (propType) => {
