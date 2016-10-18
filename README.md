@@ -20,7 +20,7 @@ class Component extends React.Component {
   static propTypes = {
     title: React.PropTypes.string.isRequired,
     count: React.PropTypes.number.isRequired,
-    user: ReactPropTypes.shape({
+    user: React.PropTypes.shape({
       loggedIn: React.PropTypes.bool.isRequired,
       name: React.PropTypes.string.isRequired
     }).isRequired
