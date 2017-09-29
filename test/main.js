@@ -554,4 +554,13 @@ describe('generateProps(opts)', () => {
       })
     })
   })
+
+  describe('given opts.generators = ', () => {
+    describe('with bool override', () => {
+      it('generates a custom bool', () => {
+        const opts = { generators: { bool: () => false } }
+        generateProps(propTypes, opts).requiredBool.should.be.false
+      })
+    })
+  })
 })

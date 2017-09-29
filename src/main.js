@@ -61,7 +61,7 @@ const shouldGenerate = (propType) => {
 }
 
 const generateOneProp = (propType, propName) => {
-  const generate = GENERATORS[propType.type]
+  const generate = options.generators[propType.type]
   const arg = propType.arg
   if (generate) {
     if (shouldGenerate(propType)) {
@@ -84,6 +84,11 @@ const forceGenerateOneProp = (propType) => {
 
 const generateProps = (arg, opts) => {
   options = _.defaults({}, opts, { required: true, optional: false })
+  if (opts && opts.generators) {
+    options.generators = _.defaults({}, opts.generators, GENERATORS)
+  } else {
+    options.generators = GENERATORS
+  }
 
   let propTypes
 
