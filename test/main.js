@@ -380,17 +380,17 @@ describe('generateProps', () => {
 
   describe('given a required oneOf', () => {
     describe('foo or bar', () => {
-      it('generates either foo or bar', () => {
+      it('generates the first option, foo', () => {
         const propTypes = { myFooOrBar: React.PropTypes.oneOf(['foo', 'bar']).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        const expected = ['foo', 'bar']
+        const expected = 'foo'
 
-        generateProps(propTypes).myFooOrBar.should.be.oneOf(expected)
-        generateProps({ propTypes }).myFooOrBar.should.be.oneOf(expected)
-        generateProps(ComponentAsClass).myFooOrBar.should.be.oneOf(expected)
-        generateProps(ComponentAsFunction).myFooOrBar.should.be.oneOf(expected)
+        generateProps(propTypes).myFooOrBar.should.equal(expected)
+        generateProps({ propTypes }).myFooOrBar.should.equal(expected)
+        generateProps(ComponentAsClass).myFooOrBar.should.equal(expected)
+        generateProps(ComponentAsFunction).myFooOrBar.should.equal(expected)
       })
     })
   })
@@ -398,17 +398,17 @@ describe('generateProps', () => {
   describe('given a required oneOfType', () => {
     describe('bool or', () => {
       describe('number', () => {
-        it('generates either a bool or a number', () => {
+        it('generates the first option, a bool', () => {
           const propTypes = { myArrayOrBool: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.number]).isRequired }
           ComponentAsClass.propTypes = propTypes
           ComponentAsFunction.propTypes = propTypes
 
-          const expected = [true, 1]
+          const expected = true
 
-          generateProps(propTypes).myArrayOrBool.should.be.oneOf(expected)
-          generateProps({ propTypes }).myArrayOrBool.should.be.oneOf(expected)
-          generateProps(ComponentAsClass).myArrayOrBool.should.be.oneOf(expected)
-          generateProps(ComponentAsFunction).myArrayOrBool.should.be.oneOf(expected)
+          generateProps(propTypes).myArrayOrBool.should.equal(expected)
+          generateProps({ propTypes }).myArrayOrBool.should.equal(expected)
+          generateProps(ComponentAsClass).myArrayOrBool.should.equal(expected)
+          generateProps(ComponentAsFunction).myArrayOrBool.should.equal(expected)
         })
       })
     })
