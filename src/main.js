@@ -3,10 +3,7 @@ const sinon = require('sinon')
 const React = require('react')
 const { PropTypes } = React
 
-// TODO: Options API
-const options = {
-  required: true
-}
+let options
 
 const wrapPropTypes = () => {
   // Adds a .type key which allows the type to be derived during the
@@ -50,13 +47,12 @@ const GENERATORS = {
   instanceOf: (klass) => new klass(),
   objectOf: (type) => ({ key: generateOneProp(type) }),
   oneOf: (values) => _.first(values),
-  oneOfType: (types) => generateOneProp(_.extend(_.first(types), { forceGeneration: true })),
+  oneOfType: (types) => forceGenerateOneProp(_.first(types)),
   shape: (shape) => generateProps(shape)
 }
 
 const shouldGenerate = (propType) => {
   return (
-    propType.forceGeneration ||
     // Generate required props, and this is the required version
     (options.required && !propType.isRequired) ||
     // Generate optional props, and this is the optional version
@@ -78,7 +74,17 @@ const generateOneProp = (propType, propName) => {
   }
 }
 
-const generateProps = (arg) => {
+const forceGenerateOneProp = (propType) => {
+  const generate = GENERATORS[propType.type]
+  const arg = propType.arg
+  if (generate) {
+    return generate(arg)
+  }
+}
+
+const generateProps = (arg, opts) => {
+  options = _.defaults({}, opts, { required: true, optional: false })
+
   let propTypes
 
   if (!arg) {

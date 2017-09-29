@@ -475,3 +475,83 @@ describe('generateProps', () => {
     })
   })
 })
+
+describe('generateProps(opts)', () => {
+  const propTypes = {
+    optionalArray: React.PropTypes.array,
+    requiredArray: React.PropTypes.array.isRequired,
+    optionalBool: React.PropTypes.bool,
+    requiredBool: React.PropTypes.bool.isRequired,
+    optionalNumber: React.PropTypes.number,
+    requiredNumber: React.PropTypes.number.isRequired,
+    optionalObject: React.PropTypes.object,
+    requiredObject: React.PropTypes.object.isRequired,
+    optionalString: React.PropTypes.string,
+    requiredString: React.PropTypes.string.isRequired,
+    optionalAny: React.PropTypes.any,
+    requiredAny: React.PropTypes.any.isRequired,
+    optionalElement: React.PropTypes.element,
+    requiredElement: React.PropTypes.element.isRequired,
+    optionalNode: React.PropTypes.node,
+    requiredNode: React.PropTypes.node.isRequired
+  }
+
+  const required = {
+    requiredArray: [],
+    requiredBool: true,
+    requiredNumber: 1,
+    requiredObject: {},
+    requiredString: 'A String',
+    requiredAny: 'Any',
+    requiredElement: React.createElement('div'),
+    requiredNode: [React.createElement('div'), React.createElement('div')]
+  }
+
+  const optional = {
+    optionalArray: [],
+    optionalBool: true,
+    optionalNumber: 1,
+    optionalObject: {},
+    optionalString: 'A String',
+    optionalAny: 'Any',
+    optionalElement: React.createElement('div'),
+    optionalNode: [React.createElement('div'), React.createElement('div')]
+  }
+
+  describe('given opts = ', () => {
+    describe('undefined', () => {
+      it('generates required props only by default', () => {
+        const expected = required
+        generateProps(propTypes).should.deep.equal(expected)
+      })
+    })
+
+    describe('{ required: true }', () => {
+      it('generates required props', () => {
+        const expected = required
+        generateProps(propTypes, { required: true }).should.deep.equal(expected)
+      })
+    })
+
+    describe('{ required: false }', () => {
+      it('does not generate required props', () => {
+        const expected = {}
+        generateProps(propTypes, { required: false }).should.deep.equal(expected)
+      })
+    })
+
+    describe('{ optional: true }', () => {
+      it('generates optional props', () => {
+        const expected = Object.assign({}, required, optional)
+        generateProps(propTypes, { optional: true }).should.deep.equal(expected)
+      })
+    })
+
+    describe('{ optional: false }', () => {
+      it('does not generate optional props', () => {
+        const expected = required
+        generateProps(propTypes, { optional: false }).should.deep.equal(expected)
+      })
+    })
+  })
+})
