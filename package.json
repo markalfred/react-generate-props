@@ -1,6 +1,6 @@
 {
   "name": "react-generate-props",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Generate default props based on your React component's PropTypes",
   "main": "dist/main.js",
   "engines": {
