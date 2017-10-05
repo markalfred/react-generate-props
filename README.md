@@ -13,23 +13,44 @@ $ npm install --save-dev react-generate-props
 
 Define your component's propTypes.
 
+```jsx
+const Counter = ({ count }) => <div>{count}</div>
+Counter.propTypes = { count: PropTypes.number.isRequired }
+export default Counter
+```
+
+Pass the component to this library. It will generate reasonable props based on the defined types.
+
 ```js
-// react-component.jsx
+import generateProps from 'react-generate-props'
+import Counter from './counter'
+generateProps(Counter)
+// => { count: 1 }
+```
+
+Use these default props to reduce boilerplate and prop type validation errors in your tests! :tada:
+
+## Example
+
+A more in-depth example.
+
+```jsx
+// component.jsx
 
 class Component extends React.Component {
   static propTypes = {
-    title: React.PropTypes.string.isRequired,
-    count: React.PropTypes.number.isRequired,
-    user: React.PropTypes.shape({
-      loggedIn: React.PropTypes.bool.isRequired,
-      name: React.PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    followers: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      loggedIn: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired
     }).isRequired
   }
 
   render() {
     <div>
       <h1>{this.props.title}</h1>
-      <small>{this.props.count}</small>
+      <small>{this.props.followers}</small>
       {this.props.user.loggedIn && <p>Hello, {this.props.user.name}.</p>}
     </div>
   }
@@ -38,18 +59,14 @@ class Component extends React.Component {
 export default Component
 ```
 
-=====
-
-Then, pass your component to this library. It will generate reasonable defaults for all of your component's required propTypes.
-
 ```js
 // component-test.js
 
 import generateProps from 'react-generate-props'
-import Component from './react-component'
+import Component from './component.jsx'
 
 const props = generateProps(Component)
-assertEqual(props, { title: 'A String', count: 1, user: { loggedIn: true, name: 'A String' } })
+assertEqual(props, { title: 'string', followers: 1, user: { loggedIn: true, name: 'string' } })
 
 render(<Component {...props}/>)
 
@@ -57,10 +74,97 @@ render(<Component {...props}/>)
 Result:
 
 <div>
-  <h1>A String</h1>
+  <h1>string</h1>
   <small>1</small>
-  <p>Hello, A String</p>
+  <p>Hello, string</p>
 </div>
 
 ***/
+```
+
+## API
+
+The library takes two arguments.
+
+```js
+generateProps(schema, opts)
+```
+
+#### `schema`: An Object, Function, or Class containing a PropTypes definition. All of the following are valid:
+
+Plain Object
+```js
+const Counter = { count: PropTypes.number.isRequired }
+```
+
+Plain Object with a `propTypes` key
+```js
+const Counter = { propTypes: { count: PropTypes.number.isRequired } }
+```
+
+Functional Component
+```js
+const Counter = ({ counter }) => {/* ... */}
+Counter.propTypes = { count: PropTypes.number.isRequired }
+```
+
+`React.Component` Class
+```js
+class Counter extends React.Component {
+  static propTypes = { count: PropTypes.number.isRequired }
+}
+```
+
+In each of these cases, the effect would be the same
+```js
+generateProps(Counter)
+// => { count: 1 }
+```
+
+#### `opts`: An Object which may contain the following:
+
+```js
+{
+  required: true,
+  // default: true. When true, props marked as .isRequired will be generated.
+  
+  optional: false,
+  // default: false. When true, props *not* marked as .isRequired will be generated.
+  
+  generators: {
+    // Can be used to override this lib's default generators.
+    // Each key is a prop type, each value is a function, 
+    // each function receives its definition's arguments.
+    bool: () => false,
+    function: () => spy(),
+    instanceOf: (klass) => new klass(),
+    oneOf: (values) => values[values.length - 1]
+  }
+}
+```
+
+## One More Example
+
+```jsx
+const propTypes = {
+  name: PropTypes.string.isRequired,
+  loggedIn: PropTypes.bool,
+  userType: PropTypes.oneOf(['admin', 'user']).isRequired
+}
+
+generateProps(propTypes)
+// => { name: 'string', userType: 'admin' }
+
+generateProps(propTypes, { optional: true })
+// => { name: 'string', loggedIn: true, userType: 'admin' }
+
+generateProps(propTypes, { 
+  optional: true,
+  generators: { 
+    string: () => 'Alice',
+    bool: () => false,
+    oneOf: (values) => values[values.length - 1]
+  }
+})
+// => { name: 'Alice', loggedIn: false, userType: 'user' }
 ```
