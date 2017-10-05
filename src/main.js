@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const React = require('react')
-const { PropTypes } = React
+const PropTypes = require('./prop-types')
 
 let options
 

@@ -1,4 +1,5 @@
 const React = require('react')
+const PropTypes = require('../src/prop-types')
 
 const ComponentAsClass = class extends React.Component { render() { 'component' } }
 const ComponentAsFunction = () => 'component'
@@ -20,7 +21,7 @@ describe('generateProps', () => {
 
   describe('given a required array', () => {
     it('generates an array', () => {
-      const propTypes = { myArray: React.PropTypes.array.isRequired }
+      const propTypes = { myArray: PropTypes.array.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -35,7 +36,7 @@ describe('generateProps', () => {
 
   describe('given a required bool', () => {
     it('generates a bool', () => {
-      const propTypes = { myBool: React.PropTypes.bool.isRequired }
+      const propTypes = { myBool: PropTypes.bool.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -50,7 +51,7 @@ describe('generateProps', () => {
 
   describe('given a required func', () => {
     it('generates a func', () => {
-      const propTypes = { myFunc: React.PropTypes.func.isRequired }
+      const propTypes = { myFunc: PropTypes.func.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -63,7 +64,7 @@ describe('generateProps', () => {
 
   describe('given a required number', () => {
     it('generates a number', () => {
-      const propTypes = { myNumber: React.PropTypes.number.isRequired }
+      const propTypes = { myNumber: PropTypes.number.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -78,7 +79,7 @@ describe('generateProps', () => {
 
   describe('given a required object', () => {
     it('generates an object', () => {
-      const propTypes = { myObject: React.PropTypes.object.isRequired }
+      const propTypes = { myObject: PropTypes.object.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -93,7 +94,7 @@ describe('generateProps', () => {
 
   describe('given a required string', () => {
     it('generates a string', () => {
-      const propTypes = { myString: React.PropTypes.string.isRequired }
+      const propTypes = { myString: PropTypes.string.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -108,7 +109,7 @@ describe('generateProps', () => {
 
   describe('given a required any', () => {
     it('generates an any', () => {
-      const propTypes = { myAny: React.PropTypes.any.isRequired }
+      const propTypes = { myAny: PropTypes.any.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -123,7 +124,7 @@ describe('generateProps', () => {
 
   describe('given a required element', () => {
     it('generates a react element', () => {
-      const propTypes = { myElement: React.PropTypes.element.isRequired }
+      const propTypes = { myElement: PropTypes.element.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -138,7 +139,7 @@ describe('generateProps', () => {
 
   describe('given a required node', () => {
     it('generates a node', () => {
-      const propTypes = { myNode: React.PropTypes.node.isRequired }
+      const propTypes = { myNode: PropTypes.node.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -154,7 +155,7 @@ describe('generateProps', () => {
   describe('given a required arrayOf', () => {
     describe('required arrays', () => {
       it('generates an array of arrays', () => {
-        const propTypes = { myArrayOfArrays: React.PropTypes.arrayOf(React.PropTypes.array.isRequired).isRequired }
+        const propTypes = { myArrayOfArrays: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -169,7 +170,7 @@ describe('generateProps', () => {
 
     describe('required bools', () => {
       it('generates an array of bools', () => {
-        const propTypes = { myArrayOfBools: React.PropTypes.arrayOf(React.PropTypes.bool.isRequired).isRequired }
+        const propTypes = { myArrayOfBools: PropTypes.arrayOf(PropTypes.bool.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -184,7 +185,7 @@ describe('generateProps', () => {
 
     describe('required funcs', () => {
       it('generates an array of funcs', () => {
-        const propTypes = { myArrayOfFuncs: React.PropTypes.arrayOf(React.PropTypes.func.isRequired).isRequired }
+        const propTypes = { myArrayOfFuncs: PropTypes.arrayOf(PropTypes.func.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -197,7 +198,7 @@ describe('generateProps', () => {
 
     describe('required numbers', () => {
       it('generates an array of numbers', () => {
-        const propTypes = { myArrayOfNumbers: React.PropTypes.arrayOf(React.PropTypes.number.isRequired).isRequired }
+        const propTypes = { myArrayOfNumbers: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -212,7 +213,7 @@ describe('generateProps', () => {
 
     describe('required objects', () => {
       it('generates an array of objects', () => {
-        const propTypes = { myArrayOfObjects: React.PropTypes.arrayOf(React.PropTypes.object.isRequired).isRequired }
+        const propTypes = { myArrayOfObjects: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -227,7 +228,7 @@ describe('generateProps', () => {
 
     describe('required strings', () => {
       it('generates an array of strings', () => {
-        const propTypes = { myArrayOfStrings: React.PropTypes.arrayOf(React.PropTypes.string.isRequired).isRequired }
+        const propTypes = { myArrayOfStrings: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -242,7 +243,7 @@ describe('generateProps', () => {
 
     describe('required anys', () => {
       it('generates an array of anys', () => {
-        const propTypes = { myArrayOfAnys: React.PropTypes.arrayOf(React.PropTypes.any.isRequired).isRequired }
+        const propTypes = { myArrayOfAnys: PropTypes.arrayOf(PropTypes.any.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -260,7 +261,7 @@ describe('generateProps', () => {
     it('generates a an instance of MyClass', () => {
       class MyClass {}
 
-      const propTypes = { myInstance: React.PropTypes.instanceOf(MyClass).isRequired }
+      const propTypes = { myInstance: PropTypes.instanceOf(MyClass).isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
@@ -276,7 +277,7 @@ describe('generateProps', () => {
   describe('given a required objectOf', () => {
     describe('required arrays', () => {
       it('generates an array of arrays', () => {
-        const propTypes = { myObjectOfArrays: React.PropTypes.objectOf(React.PropTypes.array.isRequired).isRequired }
+        const propTypes = { myObjectOfArrays: PropTypes.objectOf(PropTypes.array.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -291,7 +292,7 @@ describe('generateProps', () => {
 
     describe('required bools', () => {
       it('generates an array of bools', () => {
-        const propTypes = { myObjectOfBools: React.PropTypes.objectOf(React.PropTypes.bool.isRequired).isRequired }
+        const propTypes = { myObjectOfBools: PropTypes.objectOf(PropTypes.bool.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -306,7 +307,7 @@ describe('generateProps', () => {
 
     describe('required funcs', () => {
       it('generates an array of funcs', () => {
-        const propTypes = { myObjectOfFuncs: React.PropTypes.objectOf(React.PropTypes.func.isRequired).isRequired }
+        const propTypes = { myObjectOfFuncs: PropTypes.objectOf(PropTypes.func.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -319,7 +320,7 @@ describe('generateProps', () => {
 
     describe('required numbers', () => {
       it('generates an array of numbers', () => {
-        const propTypes = { myObjectOfNumbers: React.PropTypes.objectOf(React.PropTypes.number.isRequired).isRequired }
+        const propTypes = { myObjectOfNumbers: PropTypes.objectOf(PropTypes.number.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -334,7 +335,7 @@ describe('generateProps', () => {
 
     describe('required objects', () => {
       it('generates an array of objects', () => {
-        const propTypes = { myObjectOfObjects: React.PropTypes.objectOf(React.PropTypes.object.isRequired).isRequired }
+        const propTypes = { myObjectOfObjects: PropTypes.objectOf(PropTypes.object.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -349,7 +350,7 @@ describe('generateProps', () => {
 
     describe('required strings', () => {
       it('generates an array of strings', () => {
-        const propTypes = { myObjectOfStrings: React.PropTypes.objectOf(React.PropTypes.string.isRequired).isRequired }
+        const propTypes = { myObjectOfStrings: PropTypes.objectOf(PropTypes.string.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -364,7 +365,7 @@ describe('generateProps', () => {
 
     describe('required anys', () => {
       it('generates an array of anys', () => {
-        const propTypes = { myObjectOfAnys: React.PropTypes.objectOf(React.PropTypes.any.isRequired).isRequired }
+        const propTypes = { myObjectOfAnys: PropTypes.objectOf(PropTypes.any.isRequired).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -381,7 +382,7 @@ describe('generateProps', () => {
   describe('given a required oneOf', () => {
     describe('foo or bar', () => {
       it('generates the first option, foo', () => {
-        const propTypes = { myFooOrBar: React.PropTypes.oneOf(['foo', 'bar']).isRequired }
+        const propTypes = { myFooOrBar: PropTypes.oneOf(['foo', 'bar']).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -399,7 +400,7 @@ describe('generateProps', () => {
     describe('bool or', () => {
       describe('number', () => {
         it('generates the first option, a bool', () => {
-          const propTypes = { myArrayOrBool: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.number]).isRequired }
+          const propTypes = { myArrayOrBool: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired }
           ComponentAsClass.propTypes = propTypes
           ComponentAsFunction.propTypes = propTypes
 
@@ -417,7 +418,7 @@ describe('generateProps', () => {
   describe('given a required shape', () => {
     describe('with a required array value', () => {
       it('generates an object with an array value', () => {
-        const propTypes = { myShape: React.PropTypes.shape({ myArray: React.PropTypes.array.isRequired }).isRequired }
+        const propTypes = { myShape: PropTypes.shape({ myArray: PropTypes.array.isRequired }).isRequired }
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
@@ -432,9 +433,9 @@ describe('generateProps', () => {
       describe('and a required bool', () => {
         it('generates an object with an array value and a bool value', () => {
           const propTypes = {
-            myShape: React.PropTypes.shape({
-              myArray: React.PropTypes.array.isRequired,
-              myBool: React.PropTypes.bool.isRequired
+            myShape: PropTypes.shape({
+              myArray: PropTypes.array.isRequired,
+              myBool: PropTypes.bool.isRequired
             }).isRequired
           }
           ComponentAsClass.propTypes = propTypes
@@ -453,10 +454,10 @@ describe('generateProps', () => {
         describe('with a required number', () => {
           it('generates an object with an array value and a sub-object with bool value', () => {
             const propTypes = {
-              myShape: React.PropTypes.shape({
-                myArray: React.PropTypes.array.isRequired,
-                mySubShape: React.PropTypes.shape({
-                  myNumber: React.PropTypes.number.isRequired
+              myShape: PropTypes.shape({
+                myArray: PropTypes.array.isRequired,
+                mySubShape: PropTypes.shape({
+                  myNumber: PropTypes.number.isRequired
                 }).isRequired
               }).isRequired
             }
@@ -478,22 +479,22 @@ describe('generateProps', () => {
 
 describe('generateProps(opts)', () => {
   const propTypes = {
-    optionalArray: React.PropTypes.array,
-    requiredArray: React.PropTypes.array.isRequired,
-    optionalBool: React.PropTypes.bool,
-    requiredBool: React.PropTypes.bool.isRequired,
-    optionalNumber: React.PropTypes.number,
-    requiredNumber: React.PropTypes.number.isRequired,
-    optionalObject: React.PropTypes.object,
-    requiredObject: React.PropTypes.object.isRequired,
-    optionalString: React.PropTypes.string,
-    requiredString: React.PropTypes.string.isRequired,
-    optionalAny: React.PropTypes.any,
-    requiredAny: React.PropTypes.any.isRequired,
-    optionalElement: React.PropTypes.element,
-    requiredElement: React.PropTypes.element.isRequired,
-    optionalNode: React.PropTypes.node,
-    requiredNode: React.PropTypes.node.isRequired
+    optionalArray: PropTypes.array,
+    requiredArray: PropTypes.array.isRequired,
+    optionalBool: PropTypes.bool,
+    requiredBool: PropTypes.bool.isRequired,
+    optionalNumber: PropTypes.number,
+    requiredNumber: PropTypes.number.isRequired,
+    optionalObject: PropTypes.object,
+    requiredObject: PropTypes.object.isRequired,
+    optionalString: PropTypes.string,
+    requiredString: PropTypes.string.isRequired,
+    optionalAny: PropTypes.any,
+    requiredAny: PropTypes.any.isRequired,
+    optionalElement: PropTypes.element,
+    requiredElement: PropTypes.element.isRequired,
+    optionalNode: PropTypes.node,
+    requiredNode: PropTypes.node.isRequired
   }
 
   const required = {
