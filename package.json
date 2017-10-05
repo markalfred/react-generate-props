@@ -21,7 +21,7 @@
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "mocha-lcov-reporter": "^1.2.0",
-    "react": "^15.3.2"
+    "react": "^16.0.0"
   },
   "peerDependencies": {
     "react": "0.13.x || 0.14.x || ^15.0.0-0 || 15.x || 16.x"
