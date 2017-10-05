@@ -97,7 +97,7 @@ describe('generateProps', () => {
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
-      const expected = { myString: 'A String' }
+      const expected = { myString: 'string' }
 
       generateProps(propTypes).should.deep.equal(expected)
       generateProps({ propTypes }).should.deep.equal(expected)
@@ -112,7 +112,7 @@ describe('generateProps', () => {
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
-      const expected = { myAny: 'Any' }
+      const expected = { myAny: 'any' }
 
       generateProps(propTypes).should.deep.equal(expected)
       generateProps({ propTypes }).should.deep.equal(expected)
@@ -142,7 +142,7 @@ describe('generateProps', () => {
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
-      const expected = { myNode: [React.createElement('div'), React.createElement('div')] }
+      const expected = { myNode: 'node' }
 
       generateProps(propTypes).should.deep.equal(expected)
       generateProps({ propTypes }).should.deep.equal(expected)
@@ -231,7 +231,7 @@ describe('generateProps', () => {
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        const expected = { myArrayOfStrings: ['A String'] }
+        const expected = { myArrayOfStrings: ['string'] }
 
         generateProps(propTypes).should.deep.equal(expected)
         generateProps({ propTypes }).should.deep.equal(expected)
@@ -246,7 +246,7 @@ describe('generateProps', () => {
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        const expected = { myArrayOfAnys: ['Any'] }
+        const expected = { myArrayOfAnys: ['any'] }
 
         generateProps(propTypes).should.deep.equal(expected)
         generateProps({ propTypes }).should.deep.equal(expected)
@@ -353,7 +353,7 @@ describe('generateProps', () => {
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        const expected = { myObjectOfStrings: { key: 'A String' } }
+        const expected = { myObjectOfStrings: { key: 'string' } }
 
         generateProps(propTypes).should.deep.equal(expected)
         generateProps({ propTypes }).should.deep.equal(expected)
@@ -368,7 +368,7 @@ describe('generateProps', () => {
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        const expected = { myObjectOfAnys: { key: 'Any' } }
+        const expected = { myObjectOfAnys: { key: 'any' } }
 
         generateProps(propTypes).should.deep.equal(expected)
         generateProps({ propTypes }).should.deep.equal(expected)
@@ -501,10 +501,10 @@ describe('generateProps(opts)', () => {
     requiredBool: true,
     requiredNumber: 1,
     requiredObject: {},
-    requiredString: 'A String',
-    requiredAny: 'Any',
+    requiredString: 'string',
+    requiredAny: 'any',
     requiredElement: React.createElement('div'),
-    requiredNode: [React.createElement('div'), React.createElement('div')]
+    requiredNode: 'node'
   }
 
   const optional = {
@@ -512,10 +512,10 @@ describe('generateProps(opts)', () => {
     optionalBool: true,
     optionalNumber: 1,
     optionalObject: {},
-    optionalString: 'A String',
-    optionalAny: 'Any',
+    optionalString: 'string',
+    optionalAny: 'any',
     optionalElement: React.createElement('div'),
-    optionalNode: [React.createElement('div'), React.createElement('div')]
+    optionalNode: 'node'
   }
 
   describe('given opts = ', () => {

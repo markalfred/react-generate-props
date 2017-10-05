@@ -36,10 +36,10 @@ const GENERATORS = {
   func: () => () => {},
   number: () => 1,
   object: () => ({}),
-  string: () => 'A String',
-  any: () => 'Any',
+  string: () => 'string',
+  any: () => 'any',
   element: () => React.createElement('div'),
-  node: () => [React.createElement('div'), React.createElement('div')],
+  node: () => 'node',
 
   // Complex types
   arrayOf: (type) => [generateOneProp(type)],
