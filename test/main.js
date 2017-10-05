@@ -54,10 +54,10 @@ describe('generateProps', () => {
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
-      generateProps(propTypes).myFunc.id.should.match(/spy#[0-9]+/)
-      generateProps({ propTypes }).myFunc.id.should.match(/spy#[0-9]+/)
-      generateProps(ComponentAsClass).myFunc.id.should.match(/spy#[0-9]+/)
-      generateProps(ComponentAsFunction).myFunc.id.should.match(/spy#[0-9]+/)
+      generateProps(propTypes).myFunc.should.be.a('function')
+      generateProps({ propTypes }).myFunc.should.be.a('function')
+      generateProps(ComponentAsClass).myFunc.should.be.a('function')
+      generateProps(ComponentAsFunction).myFunc.should.be.a('function')
     })
   })
 
@@ -188,10 +188,10 @@ describe('generateProps', () => {
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        generateProps(propTypes).myArrayOfFuncs[0].id.should.match(/spy#[0-9]+/)
-        generateProps({ propTypes }).myArrayOfFuncs[0].id.should.match(/spy#[0-9]+/)
-        generateProps(ComponentAsClass).myArrayOfFuncs[0].id.should.match(/spy#[0-9]+/)
-        generateProps(ComponentAsFunction).myArrayOfFuncs[0].id.should.match(/spy#[0-9]+/)
+        generateProps(propTypes).myArrayOfFuncs[0].should.be.a('function')
+        generateProps({ propTypes }).myArrayOfFuncs[0].should.be.a('function')
+        generateProps(ComponentAsClass).myArrayOfFuncs[0].should.be.a('function')
+        generateProps(ComponentAsFunction).myArrayOfFuncs[0].should.be.a('function')
       })
     })
 
@@ -310,10 +310,10 @@ describe('generateProps', () => {
         ComponentAsClass.propTypes = propTypes
         ComponentAsFunction.propTypes = propTypes
 
-        generateProps(propTypes).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
-        generateProps({ propTypes }).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
-        generateProps(ComponentAsClass).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
-        generateProps(ComponentAsFunction).myObjectOfFuncs.key.id.should.match(/spy#[0-9]+/)
+        generateProps(propTypes).myObjectOfFuncs.key.should.be.a('function')
+        generateProps({ propTypes }).myObjectOfFuncs.key.should.be.a('function')
+        generateProps(ComponentAsClass).myObjectOfFuncs.key.should.be.a('function')
+        generateProps(ComponentAsFunction).myObjectOfFuncs.key.should.be.a('function')
       })
     })
 

@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const sinon = require('sinon')
 const React = require('react')
 const { PropTypes } = React
 
@@ -34,7 +33,7 @@ const GENERATORS = {
   // Simple types
   array: () => [],
   bool: () => true,
-  func: () => sinon.spy(),
+  func: () => () => {},
   number: () => 1,
   object: () => ({}),
   string: () => 'A String',
