@@ -1,12 +1,8 @@
 const _ = require('lodash')
-const sinon = require('sinon')
 const React = require('react')
-const { PropTypes } = React
+const PropTypes = require('./prop-types')
 
-// TODO: Options API
-const options = {
-  required: true
-}
+let options
 
 const wrapPropTypes = () => {
   // Adds a .type key which allows the type to be derived during the
@@ -37,26 +33,25 @@ const GENERATORS = {
   // Simple types
   array: () => [],
   bool: () => true,
-  func: () => sinon.spy(),
+  func: () => () => {},
   number: () => 1,
   object: () => ({}),
-  string: () => 'A String',
-  any: () => 'Any',
+  string: () => 'string',
+  any: () => 'any',
   element: () => React.createElement('div'),
-  node: () => [React.createElement('div'), React.createElement('div')],
+  node: () => 'node',
 
   // Complex types
   arrayOf: (type) => [generateOneProp(type)],
   instanceOf: (klass) => new klass(),
   objectOf: (type) => ({ key: generateOneProp(type) }),
-  oneOf: (values) => _.sample(values),
-  oneOfType: (types) => generateOneProp(_.extend(_.sample(types), { forceGeneration: true })),
+  oneOf: (values) => _.first(values),
+  oneOfType: (types) => forceGenerateOneProp(_.first(types)),
   shape: (shape) => generateProps(shape)
 }
 
 const shouldGenerate = (propType) => {
   return (
-    propType.forceGeneration ||
     // Generate required props, and this is the required version
     (options.required && !propType.isRequired) ||
     // Generate optional props, and this is the optional version
@@ -65,7 +60,7 @@ const shouldGenerate = (propType) => {
 }
 
 const generateOneProp = (propType, propName) => {
-  const generate = GENERATORS[propType.type]
+  const generate = options.generators[propType.type]
   const arg = propType.arg
   if (generate) {
     if (shouldGenerate(propType)) {
@@ -78,7 +73,22 @@ const generateOneProp = (propType, propName) => {
   }
 }
 
-const generateProps = (arg) => {
+const forceGenerateOneProp = (propType) => {
+  const generate = GENERATORS[propType.type]
+  const arg = propType.arg
+  if (generate) {
+    return generate(arg)
+  }
+}
+
+const generateProps = (arg, opts) => {
+  options = _.defaults({}, opts, { required: true, optional: false })
+  if (opts && opts.generators) {
+    options.generators = _.defaults({}, opts.generators, GENERATORS)
+  } else {
+    options.generators = GENERATORS
+  }
+
   let propTypes
 
   if (!arg) {
