@@ -38,3 +38,4 @@ jspm_packages
 
 .env
 dist
+.DS_Store
