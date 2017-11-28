@@ -42,12 +42,12 @@ const GENERATORS = {
   node: (propName) => propName,
 
   // Complex types
-  arrayOf: (propName, isRequired, type) => [generateOneProp(type, propName, false)],
-  instanceOf: (propName, isRequired, klass) => new klass(),
-  objectOf: (propName, isRequired, type) => ({ key: generateOneProp(type, propName, false) }),
-  oneOf: (propName, isRequired, values) => _.first(values),
-  oneOfType: (propName, isRequired, types) => forceGenerateOneProp(_.first(types), propName),
-  shape: (propName, isRequired, shape) => generateProps(shape)
+  arrayOf: (propName, type) => [generateOneProp(type, propName, false)],
+  instanceOf: (propName, klass) => new klass(),
+  objectOf: (propName, type) => ({ key: generateOneProp(type, propName, false) }),
+  oneOf: (propName, values) => _.first(values),
+  oneOfType: (propName, types) => forceGenerateOneProp(_.first(types), propName),
+  shape: (propName, shape) => generateProps(shape)
 }
 
 const shouldGenerate = (propType) => {
@@ -60,7 +60,7 @@ const shouldGenerate = (propType) => {
 }
 
 const generateOneProp = (propType, propName, wrapInArray=true) => {
-  const generate = options.generators[propType.type].bind(this, propName, !propType.isRequired)
+  const generate = options.generators[propType.type].bind(this, propName)
   const arg = propType.arg
   if (generate) {
     if (shouldGenerate(propType)) {
@@ -74,7 +74,7 @@ const generateOneProp = (propType, propName, wrapInArray=true) => {
 }
 
 const forceGenerateOneProp = (propType, propName) => {
-  const generate = GENERATORS[propType.type].bind(this, propName, !propType.isRequired)
+  const generate = GENERATORS[propType.type].bind(this, propName)
   const arg = propType.arg
   if (generate) {
     return generate(arg)
