@@ -3,6 +3,18 @@
   <summary>
     Changes that have landed in master but are not yet released.
   </summary>
+  Breaking Changes:
+  
+  * Default generators now produce values that match their `propName`.
+  ```js
+  generate({ foo: PropType.string, bar: PropTypes.object })
+  // Old: => { foo: 'string', bar: {} }
+  // New: => { foo: 'foo', bar: { bar: 'bar' } }
+  ```
+
+  Non-breaking Changes:
+  
+  * Generator callbacks now receive the `propName` as an argument.
 </details>
 
 ## 0.3.0 (October 5, 2017)
