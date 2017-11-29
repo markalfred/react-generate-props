@@ -31,23 +31,23 @@ wrapPropTypes()
 
 const GENERATORS = {
   // Simple types
-  array: () => [],
+  array: (propName) => [propName],
   bool: () => true,
   func: () => () => {},
   number: () => 1,
-  object: () => ({}),
-  string: () => 'string',
-  any: () => 'any',
-  element: () => React.createElement('div'),
-  node: () => 'node',
+  object: (propName) => ({ [propName]: propName }),
+  string: (propName) => propName,
+  any: (propName) => propName,
+  element: (propName) => React.createElement('div', propName),
+  node: (propName) => propName,
 
   // Complex types
-  arrayOf: (type) => [generateOneProp(type)],
-  instanceOf: (klass) => new klass(),
-  objectOf: (type) => ({ key: generateOneProp(type) }),
-  oneOf: (values) => _.first(values),
-  oneOfType: (types) => forceGenerateOneProp(_.first(types)),
-  shape: (shape) => generateProps(shape)
+  arrayOf: (propName, type) => [generateOneProp(type, propName, false)],
+  instanceOf: (propName, klass) => new klass(),
+  objectOf: (propName, type) => ({ key: generateOneProp(type, propName, false) }),
+  oneOf: (propName, values) => _.first(values),
+  oneOfType: (propName, types) => forceGenerateOneProp(_.first(types), propName),
+  shape: (propName, shape) => generateProps(shape)
 }
 
 const shouldGenerate = (propType) => {
@@ -59,12 +59,12 @@ const shouldGenerate = (propType) => {
   )
 }
 
-const generateOneProp = (propType, propName) => {
-  const generate = options.generators[propType.type]
+const generateOneProp = (propType, propName, wrapInArray=true) => {
+  const generate = options.generators[propType.type].bind(this, propName)
   const arg = propType.arg
   if (generate) {
     if (shouldGenerate(propType)) {
-      if (propName) {
+      if (wrapInArray) {
         return [propName, generate(arg)]
       } else {
         return generate(arg)
@@ -73,8 +73,8 @@ const generateOneProp = (propType, propName) => {
   }
 }
 
-const forceGenerateOneProp = (propType) => {
-  const generate = GENERATORS[propType.type]
+const forceGenerateOneProp = (propType, propName) => {
+  const generate = GENERATORS[propType.type].bind(this, propName)
   const arg = propType.arg
   if (generate) {
     return generate(arg)
