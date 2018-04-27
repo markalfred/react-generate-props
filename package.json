@@ -21,6 +21,7 @@
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "mocha-lcov-reporter": "^1.2.0",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0"
   },
   "peerDependencies": {
@@ -33,7 +34,7 @@
     "precoveralls": "npm run coverage -- --report lcovonly",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "postcoveralls": "rm -rf ./coverage",
-    "test": "npm run react:13 && mocha && npm run react:14 && mocha && npm run react:15 && mocha",
+    "test": "npm run react:13 && mocha && npm run react:14 && mocha && npm run react:15 && mocha && npm run react:16 && mocha",
     "react:clean": "rm -rf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils node_modules/prop-types",
     "react:13": "npm run react:clean && npm i react@0.13",
     "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
