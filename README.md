@@ -66,20 +66,7 @@ import generateProps from 'react-generate-props'
 import Component from './component.jsx'
 
 const props = generateProps(Component)
-assertEqual(props, { title: 'string', followers: 1, user: { loggedIn: true, name: 'string' } })
-
-render(<Component {...props}/>)
-
-/***
-Result:
-
-<div>
-  <h1>string</h1>
-  <small>1</small>
-  <p>Hello, string</p>
-</div>
-
-***/
+// => { title: 'title', followers: 1, user: { loggedIn: true, name: 'name' } }
 ```
 
 ## API
