@@ -4,7 +4,7 @@
     Changes that have landed in master but are not yet released.
   </summary>
   Breaking Changes:
-  
+
   * Default generators now produce values that match their `propName`.
   ```js
   generate({ foo: PropType.string, bar: PropTypes.object })
@@ -12,8 +12,11 @@
   // New: => { foo: 'foo', bar: { bar: 'bar' } }
   ```
 
+  * Generator callbacks now receive `propName` as their first argument, and their definitions' argument as the second.
+  * `generateProps.init()` *must* be called prior to components being imported or `generateProps()` being called.
+
   Non-breaking Changes:
-  
+
   * Generator callbacks now receive the `propName` as an argument.
 </details>
 

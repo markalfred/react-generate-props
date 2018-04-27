@@ -3,8 +3,10 @@ const React = require('react')
 const PropTypes = require('./prop-types')
 
 let options
+let initialized = false;
 
 const wrapPropTypes = () => {
+  initialized = true;
   // Adds a .type key which allows the type to be derived during the
   // evaluation process. This is necessary for complex types which
   // return the result of a generator function, leaving no way to
@@ -26,8 +28,6 @@ const wrapPropTypes = () => {
     }
   })
 }
-
-wrapPropTypes()
 
 const GENERATORS = {
   // Simple types
@@ -59,7 +59,15 @@ const shouldGenerate = (propType) => {
   )
 }
 
-const generateOneProp = (propType, propName, wrapInArray=true) => {
+const initError = new Error(
+  'generateProps.init() must be called at the beginning of your test suite'
+)
+
+const generateOneProp = (propType, propName, wrapInArray = true) => {
+  if (propType.type === undefined && initialized === false) {
+    throw initError
+  }
+
   const generate = options.generators[propType.type].bind(this, propName)
   const arg = propType.arg
   if (generate) {
@@ -82,6 +90,10 @@ const forceGenerateOneProp = (propType, propName) => {
 }
 
 const generateProps = (arg, opts) => {
+  if (initialized === false) {
+    throw initError
+  }
+
   options = _.defaults({}, opts, { required: true, optional: false })
   if (opts && opts.generators) {
     options.generators = _.defaults({}, opts.generators, GENERATORS)
@@ -107,5 +119,7 @@ const generateProps = (arg, opts) => {
     .fromPairs()
     .value()
 }
+
+Object.assign(generateProps, { init: wrapPropTypes })
 
 module.exports = generateProps

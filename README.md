@@ -11,6 +11,16 @@ $ npm install --save-dev react-generate-props
 
 ## Usage
 
+**Important:**
+Initialize the library *before* importing any components into your test suite.
+
+```js
+// test-helper.js
+
+import { init } from 'react-generate-props'
+init()
+```
+
 Define your component's propTypes.
 
 ```jsx
@@ -114,25 +124,28 @@ generateProps(Counter)
 {
   required: true,
   // default: true. When true, props marked as .isRequired will be generated.
-  
+
   optional: false,
   // default: false. When true, props *not* marked as .isRequired will be generated.
-  
+
   generators: {
     // Can be used to override this lib's default generators.
-    // Each key is a prop type, each value is a function, 
-    // each function receives its definition's arguments.
-    bool: () => false,
-    function: () => spy(),
-    instanceOf: (klass) => new klass(),
-    oneOf: (values) => values[values.length - 1]
+    // Each key is a prop type, each value is a function.
+    // Each function receives the propName as its first argument,
+    // followed by that prop type's argument, if it takes one.
+
+    bool: (propName) => false,
+    function: (propName) => spy(),
+    number: (propName) => propName.length,
+    instanceOf: (propName, klass) => new klass(),
+    oneOf: (propName, values) => values[values.length - 1]
   }
 }
 ```
 
 ## One More Example
 
-```jsx
+```js
 const propTypes = {
   name: PropTypes.string.isRequired,
   loggedIn: PropTypes.bool,
@@ -145,13 +158,13 @@ generateProps(propTypes)
 generateProps(propTypes, { optional: true })
 // => { name: 'string', loggedIn: true, userType: 'admin' }
 
-generateProps(propTypes, { 
+generateProps(propTypes, {
   optional: true,
-  generators: { 
-    string: () => 'Alice',
-    bool: () => false,
-    oneOf: (values) => values[values.length - 1]
+  generators: {
+    string: (propName) => 'Alice',
+    bool: (propName) => propName === 'loggedIn',
+    oneOf: (propName, values) => values[values.length - 1]
   }
 })
-// => { name: 'Alice', loggedIn: false, userType: 'user' }
+// => { name: 'Alice', loggedIn: true, userType: 'user' }
 ```
