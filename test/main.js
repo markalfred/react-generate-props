@@ -546,6 +546,12 @@ describe('generateProps(opts)', () => {
         const expected = Object.assign({}, required, optional)
         generateProps(propTypes, { optional: true }).should.deep.equal(expected)
       })
+
+      it('generates optional props in nested objects', () => {
+        const expected = Object.assign({}, required, optional)
+        generateProps({ wrappingShape: PropTypes.shape(propTypes) }, { optional: true })
+          .should.deep.equal({ wrappingShape: expected })
+      })
     })
 
     describe('{ optional: false }', () => {
