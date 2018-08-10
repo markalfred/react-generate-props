@@ -626,7 +626,9 @@ describe('PropTypes.checkPropTypes', () => {
   it('handles a generated shape', () => {
     const shape = PropTypes.shape({ myAny: PropTypes.any.isRequired }).isRequired
     const props = generateProps(shape)
-    const fn = () => PropTypes.checkPropTypes(shape, props)
+    const fn = () => PropTypes.checkPropTypes
+      ? PropTypes.checkPropTypes(shape, props)
+      : shape(props)
     fn.should.not.throw()
   })
 })
