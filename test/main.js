@@ -6,19 +6,32 @@ const ComponentAsFunction = () => 'component'
 
 const generateProps = require('../src/main')
 
-describe('generateProps', () => {
-  describe('given a bad argument', () => {
+describe('generateProps (incorrect)', () => {
+  describe('when called before generateProps.init() was called', () => {
     it('throws an error', () => {
-      // TODO: Add plain objects, or things like "React" to this.
-      const badArgs = [null, undefined, 0, 1, -1, false, true, [], NaN, '', 'string']
-
-      for (let arg of badArgs) {
-        let fnCall = () => generateProps(arg)
-        fnCall.should.throw(TypeError, 'generateProps expected a propType object or a React Component')
-      }
+      const fnCall = () => generateProps({})
+      fnCall.should.throw(Error, 'generateProps.init() must be called at the beginning of your test suite')
     })
   })
 
+  describe('given the bad argument', () => {
+    // TODO: Add plain objects, or things like "React" to this.
+    const badArgs = [null, undefined, 0, 1, -1, false, true, [], NaN, '', 'string']
+
+    for (let arg of badArgs) {
+      describe('(' + arg + ')', () => {
+        it('throws an error', () => {
+          generateProps.init()
+          let fnCall = () => generateProps(arg)
+          fnCall.should.throw(TypeError, 'generateProps expected a propType object or a React Component')
+        })
+      })
+    }
+  })
+})
+
+describe('generateProps (correct)', () => {
+  before(() => { generateProps.init() })
   describe('given a required array', () => {
     it('generates an array', () => {
       const propTypes = { myArray: PropTypes.array.isRequired }
