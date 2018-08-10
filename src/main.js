@@ -3,10 +3,10 @@ const React = require('react')
 const PropTypes = require('./prop-types')
 
 let options
-let initialized = false;
+let initialized = false
 
 const wrapPropTypes = () => {
-  initialized = true;
+  initialized = true
   // Adds a .type key which allows the type to be derived during the
   // evaluation process. This is necessary for complex types which
   // return the result of a generator function, leaving no way to
