@@ -3,35 +3,36 @@
   <summary>
     Changes that have landed in master but are not yet released.
   </summary>
-  Breaking Changes:
-
-  * Default generators now produce values that match their `propName`.
-  ```js
-  generate({ foo: PropType.string, bar: PropTypes.object })
-  // Old: => { foo: 'string', bar: {} }
-  // New: => { foo: 'foo', bar: { bar: 'bar' } }
-  ```
-
-  * Generator callbacks now receive `propName` as their first argument, and their definitions' argument as the second.
-  * `generateProps.init()` *must* be called prior to components being imported or `generateProps()` being called.
-
-  Non-breaking Changes:
-
-  * Generator callbacks now receive the `propName` as an argument.
-
-  * Fixed: Deeply nested props wouldn't respect opts argument.
-  ```js
-  generate({
-    foo: PropType.shape({
-      bar: PropType.shape({
-        baz: PropType.string
-      })
-    })
-  }, { optional: true })
-  // Old: => { foo: {} }
-  // New: => { foo: { bar: { baz: 'baz' } } }
-  ```
 </details>
+
+## 0.4.0 (August 10, 2018)
+Breaking Changes:
+
+* #21 - Default generators now produce values that match their `propName`.
+```js
+generate({ foo: PropType.string, bar: PropTypes.object })
+// Old: => { foo: 'string', bar: {} }
+// New: => { foo: 'foo', bar: { bar: 'bar' } }
+```
+
+* #21 - Generator callbacks now receive `propName` as their first argument, and their definitions' argument as the second.
+
+* #19 - `generateProps.init()` *must* be called prior to components being imported or `generateProps()` being called.
+
+Non-breaking Changes:
+
+* #17 - Fixed: Deeply nested props wouldn't respect opts argument.
+```js
+generate({
+  foo: PropType.shape({
+    bar: PropType.shape({
+      baz: PropType.string
+    })
+  })
+}, { optional: true })
+// Old: => { foo: {} }
+// New: => { foo: { bar: { baz: 'baz' } } }
+```
 
 ## 0.3.0 (October 5, 2017)
 * Generators are now deterministic by default. Previously, snapshot tests might break if `oneOf` or `oneOfType` were used.
