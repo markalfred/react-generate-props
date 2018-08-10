@@ -612,3 +612,21 @@ describe('generateProps(opts)', () => {
     })
   })
 })
+
+describe('PropTypes.checkPropTypes', () => {
+  before(() => {
+    generateProps.init()
+    global._errorBackup = global.console.error
+    global.console.error = err => { throw err }
+  })
+  after(() => {
+    global.console.error = global._errorBackup
+  })
+
+  it('handles a generated shape', () => {
+    const shape = PropTypes.shape({ myAny: PropTypes.any.isRequired }).isRequired
+    const props = generateProps(shape)
+    const fn = () => PropTypes.checkPropTypes(shape, props)
+    fn.should.not.throw()
+  })
+})

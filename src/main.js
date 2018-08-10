@@ -5,6 +5,15 @@ const PropTypes = require('./prop-types')
 let options
 let initialized = false
 
+const addHiddenProperties = (obj, prop, value) => {
+  addHiddenProperty(obj, prop, value)
+  addHiddenProperty(obj.isRequired, prop, value)
+  return obj
+}
+
+const addHiddenProperty = (obj, prop, value) =>
+  Object.defineProperty(obj, prop, { enumerable: false, value })
+
 const wrapPropTypes = () => {
   initialized = true
   // Adds a .type key which allows the type to be derived during the
@@ -17,14 +26,15 @@ const wrapPropTypes = () => {
   _.each(_.keys(GENERATORS), (k) => {
     if (PropTypes[k].isRequired !== undefined) {
       // Simple type. Just extend the object
-      _.defaultsDeep(PropTypes[k], { type: k, isRequired: { type: k } })
+      PropTypes[k] = addHiddenProperties(PropTypes[k], 'type', k)
     } else {
       // Complex type. Must extend the creator's return value
-      PropTypes[k] = (arg) =>
-        _.defaultsDeep(original[k](arg), {
-          type: k, arg: arg,
-          isRequired: { type: k, arg: arg }
-        })
+      PropTypes[k] = (arg) => {
+        let res = original[k](arg)
+        res = addHiddenProperties(res, 'type', k)
+        res = addHiddenProperties(res, 'arg', arg)
+        return res
+      }
     }
   })
 }
