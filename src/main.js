@@ -14,8 +14,8 @@ const wrapPropTypes = () => {
 
   const original = _.cloneDeep(PropTypes)
 
-  _.each(PropTypes, (v, k) => {
-    if (v.isRequired !== undefined) {
+  _.each(_.keys(GENERATORS), (k) => {
+    if (PropTypes[k].isRequired !== undefined) {
       // Simple type. Just extend the object
       _.defaultsDeep(PropTypes[k], { type: k, isRequired: { type: k } })
     } else {
