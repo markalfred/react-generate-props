@@ -4,7 +4,7 @@
     Changes that have landed in master but are not yet released.
   </summary>
   Breaking Changes:
-  
+
   * Default generators now produce values that match their `propName`.
   ```js
   generate({ foo: PropType.string, bar: PropTypes.object })
@@ -13,8 +13,21 @@
   ```
 
   Non-breaking Changes:
-  
+
   * Generator callbacks now receive the `propName` as an argument.
+
+  * Fixed: Deeply nested props wouldn't respect opts argument.
+  ```js
+  generate({
+    foo: PropType.shape({
+      bar: PropType.shape({
+        baz: PropType.string
+      })
+    })
+  }, { optional: true })
+  // Old: => { foo: {} }
+  // New: => { foo: { bar: { baz: 'baz' } } }
+  ```
 </details>
 
 ## 0.3.0 (October 5, 2017)
