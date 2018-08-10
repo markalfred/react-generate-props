@@ -31,18 +31,21 @@ const wrapPropTypes = () => {
 
 const GENERATORS = {
   // Simple types
-  array: (propName) => [propName],
+  array: (propName) => propName ? [propName] : [],
   bool: () => true,
   func: () => () => {},
   number: () => 1,
-  object: (propName) => ({ [propName]: propName }),
-  string: (propName) => propName,
-  any: (propName) => propName,
+  object: (propName) => propName ? ({ [propName]: propName }): {},
+  string: (propName) => propName || 'string',
+  any: (propName) => propName || 'any',
   element: (propName) => React.createElement('div', propName),
-  node: (propName) => propName,
+  node: (propName) => propName || 'node',
 
   // Complex types
-  arrayOf: (propName, type) => [generateOneProp(type, propName, false)],
+  arrayOf: (propName, type) => {
+    const res = generateOneProp(type, propName, false)
+    return res ? [res] : []
+  },
   instanceOf: (propName, klass) => new klass(),
   objectOf: (propName, type) => ({ key: generateOneProp(type, propName, false) }),
   oneOf: (propName, values) => _.first(values),
