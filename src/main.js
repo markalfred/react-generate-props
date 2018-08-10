@@ -108,7 +108,15 @@ const generateProps = (arg, opts) => {
 
   if (!arg) {
     throw new TypeError('generateProps expected a propType object or a React Component')
-  } else if (_.isPlainObject(arg.propTypes)) {
+  }
+
+  if (arg.type && GENERATORS[arg.type]) {
+    return generateOneProp(arg, undefined, false)
+  } else if (arg.propTypes && arg.propTypes.type && GENERATORS[arg.propTypes.type]) {
+    return generateOneProp(arg.propTypes, undefined, false)
+  }
+
+  if (_.isPlainObject(arg.propTypes)) {
     propTypes = arg.propTypes
   } else if (_.isPlainObject(arg)) {
     propTypes = arg
