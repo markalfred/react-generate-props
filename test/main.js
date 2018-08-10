@@ -413,16 +413,16 @@ describe('generateProps (correct)', () => {
     describe('bool or', () => {
       describe('number', () => {
         it('generates the first option, a bool', () => {
-          const propTypes = { myArrayOrBool: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired }
+          const propTypes = { myBoolOrNumber: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired }
           ComponentAsClass.propTypes = propTypes
           ComponentAsFunction.propTypes = propTypes
 
           const expected = true
 
-          generateProps(propTypes).myArrayOrBool.should.equal(expected)
-          generateProps({ propTypes }).myArrayOrBool.should.equal(expected)
-          generateProps(ComponentAsClass).myArrayOrBool.should.equal(expected)
-          generateProps(ComponentAsFunction).myArrayOrBool.should.equal(expected)
+          generateProps(propTypes).myBoolOrNumber.should.equal(expected)
+          generateProps({ propTypes }).myBoolOrNumber.should.equal(expected)
+          generateProps(ComponentAsClass).myBoolOrNumber.should.equal(expected)
+          generateProps(ComponentAsFunction).myBoolOrNumber.should.equal(expected)
         })
       })
     })
