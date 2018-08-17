@@ -87,7 +87,7 @@ The library takes two arguments.
 generateProps(schema, opts)
 ```
 
-#### `schema`: An Object, Function, or Class containing a PropTypes definition. All of the following are valid:
+#### `schema`: An Object, Function, or Class containing a PropTypes definition, or a single PropType. All of the following are valid:
 
 Plain Object
 ```js
@@ -110,6 +110,11 @@ Counter.propTypes = { count: PropTypes.number.isRequired }
 class Counter extends React.Component {
   static propTypes = { count: PropTypes.number.isRequired }
 }
+```
+
+Single PropType
+```js
+const Counter = PropTypes.shape({ count: PropTypes.number.isRequired }).isRequired
 ```
 
 In each of these cases, the effect would be the same

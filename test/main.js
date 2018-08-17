@@ -44,6 +44,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myArray).should.deep.equal([])
     })
   })
 
@@ -59,6 +60,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myBool).should.equal(true)
     })
   })
 
@@ -72,6 +74,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).myFunc.should.be.a('function')
       generateProps(ComponentAsClass).myFunc.should.be.a('function')
       generateProps(ComponentAsFunction).myFunc.should.be.a('function')
+      generateProps(propTypes.myFunc).should.be.a('function')
     })
   })
 
@@ -87,6 +90,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myNumber).should.equal(1)
     })
   })
 
@@ -102,6 +106,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myObject).should.deep.equal({})
     })
   })
 
@@ -117,6 +122,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myString).should.deep.equal('string')
     })
   })
 
@@ -132,6 +138,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myAny).should.deep.equal('any')
     })
   })
 
@@ -147,6 +154,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myElement).should.deep.equal(React.createElement('div'))
     })
   })
 
@@ -162,6 +170,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myNode).should.deep.equal('node')
     })
   })
 
@@ -178,6 +187,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myArrayOfArrays).should.deep.equal([[]])
       })
     })
 
@@ -193,6 +203,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myArrayOfBools).should.deep.equal([true])
       })
     })
 
@@ -206,6 +217,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).myArrayOfFuncs[0].should.be.a('function')
         generateProps(ComponentAsClass).myArrayOfFuncs[0].should.be.a('function')
         generateProps(ComponentAsFunction).myArrayOfFuncs[0].should.be.a('function')
+        generateProps(propTypes.myArrayOfFuncs)[0].should.be.a('function')
       })
     })
 
@@ -221,6 +233,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myArrayOfNumbers).should.deep.equal([1])
       })
     })
 
@@ -236,6 +249,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myArrayOfObjects).should.deep.equal([{}])
       })
     })
 
@@ -251,6 +265,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myArrayOfStrings).should.deep.equal(['string'])
       })
     })
 
@@ -266,6 +281,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myArrayOfAnys).should.deep.equal(['any'])
       })
     })
   })
@@ -284,6 +300,7 @@ describe('generateProps (correct)', () => {
       generateProps({ propTypes }).should.deep.equal(expected)
       generateProps(ComponentAsClass).should.deep.equal(expected)
       generateProps(ComponentAsFunction).should.deep.equal(expected)
+      generateProps(propTypes.myInstance).should.deep.equal(new MyClass())
     })
   })
 
@@ -300,6 +317,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myObjectOfArrays).should.deep.equal({ key: [] })
       })
     })
 
@@ -315,6 +333,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myObjectOfBools).should.deep.equal({ key: true })
       })
     })
 
@@ -328,6 +347,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).myObjectOfFuncs.key.should.be.a('function')
         generateProps(ComponentAsClass).myObjectOfFuncs.key.should.be.a('function')
         generateProps(ComponentAsFunction).myObjectOfFuncs.key.should.be.a('function')
+        generateProps(propTypes.myObjectOfFuncs).key.should.be.a('function')
       })
     })
 
@@ -343,6 +363,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myObjectOfNumbers).should.deep.equal({ key: 1 })
       })
     })
 
@@ -358,6 +379,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myObjectOfObjects).should.deep.equal({ key: {} })
       })
     })
 
@@ -373,6 +395,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myObjectOfStrings).should.deep.equal({ key: 'string' })
       })
     })
 
@@ -388,6 +411,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myObjectOfAnys).should.deep.equal({ key: 'any' })
       })
     })
   })
@@ -405,6 +429,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).myFooOrBar.should.equal(expected)
         generateProps(ComponentAsClass).myFooOrBar.should.equal(expected)
         generateProps(ComponentAsFunction).myFooOrBar.should.equal(expected)
+        generateProps(propTypes.myFooOrBar).should.equal(expected)
       })
     })
   })
@@ -413,16 +438,16 @@ describe('generateProps (correct)', () => {
     describe('bool or', () => {
       describe('number', () => {
         it('generates the first option, a bool', () => {
-          const propTypes = { myArrayOrBool: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired }
+          const propTypes = { myBoolOrNumber: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired }
           ComponentAsClass.propTypes = propTypes
           ComponentAsFunction.propTypes = propTypes
 
           const expected = true
 
-          generateProps(propTypes).myArrayOrBool.should.equal(expected)
-          generateProps({ propTypes }).myArrayOrBool.should.equal(expected)
-          generateProps(ComponentAsClass).myArrayOrBool.should.equal(expected)
-          generateProps(ComponentAsFunction).myArrayOrBool.should.equal(expected)
+          generateProps(propTypes).myBoolOrNumber.should.equal(expected)
+          generateProps({ propTypes }).myBoolOrNumber.should.equal(expected)
+          generateProps(ComponentAsClass).myBoolOrNumber.should.equal(expected)
+          generateProps(ComponentAsFunction).myBoolOrNumber.should.equal(expected)
         })
       })
     })
@@ -441,6 +466,7 @@ describe('generateProps (correct)', () => {
         generateProps({ propTypes }).should.deep.equal(expected)
         generateProps(ComponentAsClass).should.deep.equal(expected)
         generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myShape).should.deep.equal(expected.myShape)
       })
 
       describe('and a required bool', () => {
@@ -460,6 +486,7 @@ describe('generateProps (correct)', () => {
           generateProps({ propTypes }).should.deep.equal(expected)
           generateProps(ComponentAsClass).should.deep.equal(expected)
           generateProps(ComponentAsFunction).should.deep.equal(expected)
+          generateProps(propTypes.myShape).should.deep.equal(expected.myShape)
         })
       })
 
@@ -483,6 +510,7 @@ describe('generateProps (correct)', () => {
             generateProps({ propTypes }).should.deep.equal(expected)
             generateProps(ComponentAsClass).should.deep.equal(expected)
             generateProps(ComponentAsFunction).should.deep.equal(expected)
+            generateProps(propTypes.myShape).should.deep.equal(expected.myShape)
           })
         })
       })
@@ -582,5 +610,25 @@ describe('generateProps(opts)', () => {
         generateProps(propTypes, opts).requiredBool.should.be.false
       })
     })
+  })
+})
+
+describe('PropTypes.checkPropTypes', () => {
+  before(() => {
+    generateProps.init()
+    global._errorBackup = global.console.error
+    global.console.error = err => { throw err }
+  })
+  after(() => {
+    global.console.error = global._errorBackup
+  })
+
+  it('handles a generated shape', () => {
+    const shape = PropTypes.shape({ myAny: PropTypes.any.isRequired }).isRequired
+    const props = generateProps(shape)
+    const fn = () => PropTypes.checkPropTypes
+      ? PropTypes.checkPropTypes(shape, props)
+      : shape(props)
+    fn.should.not.throw()
   })
 })

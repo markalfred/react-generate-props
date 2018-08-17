@@ -3,10 +3,19 @@ const React = require('react')
 const PropTypes = require('./prop-types')
 
 let options
-let initialized = false;
+let initialized = false
+
+const addHiddenProperties = (obj, prop, value) => {
+  addHiddenProperty(obj, prop, value)
+  addHiddenProperty(obj.isRequired, prop, value)
+  return obj
+}
+
+const addHiddenProperty = (obj, prop, value) =>
+  Object.defineProperty(obj, prop, { enumerable: false, value })
 
 const wrapPropTypes = () => {
-  initialized = true;
+  initialized = true
   // Adds a .type key which allows the type to be derived during the
   // evaluation process. This is necessary for complex types which
   // return the result of a generator function, leaving no way to
@@ -14,35 +23,39 @@ const wrapPropTypes = () => {
 
   const original = _.cloneDeep(PropTypes)
 
-  _.each(PropTypes, (v, k) => {
-    if (v.isRequired !== undefined) {
+  _.each(_.keys(GENERATORS), (k) => {
+    if (PropTypes[k].isRequired !== undefined) {
       // Simple type. Just extend the object
-      _.defaultsDeep(PropTypes[k], { type: k, isRequired: { type: k } })
+      PropTypes[k] = addHiddenProperties(PropTypes[k], 'type', k)
     } else {
       // Complex type. Must extend the creator's return value
-      PropTypes[k] = (arg) =>
-        _.defaultsDeep(original[k](arg), {
-          type: k, arg: arg,
-          isRequired: { type: k, arg: arg }
-        })
+      PropTypes[k] = (arg) => {
+        let res = original[k](arg)
+        res = addHiddenProperties(res, 'type', k)
+        res = addHiddenProperties(res, 'arg', arg)
+        return res
+      }
     }
   })
 }
 
 const GENERATORS = {
   // Simple types
-  array: (propName) => [propName],
+  array: (propName) => propName ? [propName] : [],
   bool: () => true,
   func: () => () => {},
   number: () => 1,
-  object: (propName) => ({ [propName]: propName }),
-  string: (propName) => propName,
-  any: (propName) => propName,
+  object: (propName) => propName ? ({ [propName]: propName }): {},
+  string: (propName) => propName || 'string',
+  any: (propName) => propName || 'any',
   element: (propName) => React.createElement('div', propName),
-  node: (propName) => propName,
+  node: (propName) => propName || 'node',
 
   // Complex types
-  arrayOf: (propName, type) => [generateOneProp(type, propName, false)],
+  arrayOf: (propName, type) => {
+    const res = generateOneProp(type, propName, false)
+    return res ? [res] : []
+  },
   instanceOf: (propName, klass) => new klass(),
   objectOf: (propName, type) => ({ key: generateOneProp(type, propName, false) }),
   oneOf: (propName, values) => _.first(values),
@@ -105,7 +118,15 @@ const generateProps = (arg, opts) => {
 
   if (!arg) {
     throw new TypeError('generateProps expected a propType object or a React Component')
-  } else if (_.isPlainObject(arg.propTypes)) {
+  }
+
+  if (arg.type && GENERATORS[arg.type]) {
+    return generateOneProp(arg, undefined, false)
+  } else if (arg.propTypes && arg.propTypes.type && GENERATORS[arg.propTypes.type]) {
+    return generateOneProp(arg.propTypes, undefined, false)
+  }
+
+  if (_.isPlainObject(arg.propTypes)) {
     propTypes = arg.propTypes
   } else if (_.isPlainObject(arg)) {
     propTypes = arg
