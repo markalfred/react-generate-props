@@ -176,6 +176,8 @@ describe('generateProps (correct)', () => {
 
   describe('given a required symbol', () => {
     it('generates a symbol', () => {
+      if (PropTypes.symbol === undefined) return
+
       const propTypes = { mySymbol: PropTypes.symbol.isRequired }
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes

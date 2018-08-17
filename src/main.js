@@ -24,6 +24,7 @@ const wrapPropTypes = () => {
   const original = _.cloneDeep(PropTypes)
 
   _.each(_.keys(GENERATORS), (k) => {
+    if (PropTypes[k] === undefined) return
     if (PropTypes[k].isRequired !== undefined) {
       // Simple type. Just extend the object
       PropTypes[k] = addHiddenProperties(PropTypes[k], 'type', k)
