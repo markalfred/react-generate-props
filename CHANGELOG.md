@@ -9,6 +9,8 @@
   generate(PropType.bool.isRequired)
   // => true
   ```
+  
+  #27 - Generator now generates Symbols.
 </details>
 
 ## 0.4.0 (August 10, 2018)
