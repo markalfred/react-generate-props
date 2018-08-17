@@ -3,15 +3,16 @@
   <summary>
     Changes that have landed in master but are not yet released.
   </summary>
-  
-  #18 - Generator can now accept a single type and will generate it.
-  ```js
-  generate(PropType.bool.isRequired)
-  // => true
-  ```
-  
-  #27 - Generator now generates Symbols.
 </details>
+
+## 0.5.0 (August 17, 2018)
+* #18 - Generator can now accept a single type and will generate it.
+```js
+generate(PropType.bool.isRequired)
+// => true
+```
+
+* #27 - Generator now generates Symbols.
 
 ## 0.4.0 (August 10, 2018)
 Breaking Changes:
