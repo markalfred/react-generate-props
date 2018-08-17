@@ -50,6 +50,7 @@ const GENERATORS = {
   any: (propName) => propName || 'any',
   element: (propName) => React.createElement('div', propName),
   node: (propName) => propName || 'node',
+  symbol: (propName) => Symbol(propName),
 
   // Complex types
   arrayOf: (propName, type) => {

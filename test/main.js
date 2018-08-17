@@ -174,6 +174,22 @@ describe('generateProps (correct)', () => {
     })
   })
 
+  describe('given a required symbol', () => {
+    it('generates a symbol', () => {
+      const propTypes = { mySymbol: PropTypes.symbol.isRequired }
+      ComponentAsClass.propTypes = propTypes
+      ComponentAsFunction.propTypes = propTypes
+
+      const expected = 'Symbol(mySymbol)'
+
+      generateProps(propTypes).mySymbol.toString().should.equal(expected)
+      generateProps({ propTypes }).mySymbol.toString().should.equal(expected)
+      generateProps(ComponentAsClass).mySymbol.toString().should.equal(expected)
+      generateProps(ComponentAsFunction).mySymbol.toString().should.equal(expected)
+      generateProps(propTypes.mySymbol).toString().should.equal('Symbol()')
+    })
+  })
+
   describe('given a required arrayOf', () => {
     describe('required arrays', () => {
       it('generates an array of arrays', () => {
