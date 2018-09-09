@@ -74,7 +74,7 @@ class Component extends React.Component {
 export default Component
 ```
 
-```js
+```jsx
 // component-test.js
 
 import generateProps from 'react-generate-props'
@@ -82,6 +82,16 @@ import Component from './component.jsx'
 
 const props = generateProps(Component)
 // => { title: 'title', followers: 1, user: { loggedIn: true, name: 'name' } }
+
+render(<Component {...props} />)
+/* =>
+<div>
+  <h1>title</h1>
+  <small>1</small>
+  <p>Hello, name.</p>
+</div>
+*/
+
 ```
 
 ## API
