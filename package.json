@@ -36,10 +36,10 @@
     "postcoveralls": "rm -rf ./coverage",
     "test": "npm run react:13 && mocha && npm run react:14 && mocha && npm run react:15 && mocha && npm run react:16 && mocha",
     "react:clean": "rm -rf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils node_modules/prop-types",
-    "react:13": "npm run react:clean && npm i react@0.13",
-    "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
-    "react:15": "npm run react:clean && npm i react@15 react-dom@15 react-addons-test-utils@15",
-    "react:16": "npm run react:clean && npm i react@16 prop-types"
+    "react:13": "npm run react:clean && npm i --no-save --no-progress react@0.13",
+    "react:14": "npm run react:clean && npm i --no-save --no-progress react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
+    "react:15": "npm run react:clean && npm i --no-save --no-progress react@15 react-dom@15 react-addons-test-utils@15",
+    "react:16": "npm run react:clean && npm i --no-save --no-progress react@16 prop-types"
   },
   "repository": {
     "type": "git",
