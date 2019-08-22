@@ -1,6 +1,6 @@
 {
   "name": "react-generate-props",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Generate default props based on your React component's PropTypes",
   "main": "dist/main.js",
   "engines": {
@@ -36,14 +36,11 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "postcoveralls": "rm -rf ./coverage",
     "test": "npm run react:no-prop-types && npm run react:with-prop-types",
-
     "react:clean": "rm -rf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils node_modules/prop-types",
-
     "react:no-prop-types": "npm run react:13 && mocha && npm run react:14.8 && mocha && npm run react:15.2 && mocha",
     "react:13": "npm run react:clean && npm i --no-save --no-progress react@0.13 && rm -rf node_modules/prop-types",
     "react:14.8": "npm run react:clean && npm i --no-save --no-progress react@0.14.8 react-dom@0.14.8 react-addons-test-utils@0.14.8 && rm -rf node_modules/prop-types",
     "react:15.2": "npm run react:clean && npm i --no-save --no-progress react@15.2 react-dom@15 react-addons-test-utils@15.2 && rm -rf node_modules/prop-types",
-
     "react:with-prop-types": "npm run react:14 && mocha && npm run react:15 && mocha && npm run react:16 && mocha",
     "react:14": "npm run react:clean && npm i --no-save --no-progress react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
     "react:15": "npm run react:clean && npm i --no-save --no-progress react@15 react-dom@15 react-addons-test-utils@15",
