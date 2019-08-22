@@ -49,7 +49,7 @@ const GENERATORS = {
   object: (propName) => propName ? ({ [propName]: propName }): {},
   string: (propName) => propName || 'string',
   any: (propName) => propName || 'any',
-  element: (propName) => React.createElement('div', propName),
+  element: () => React.createElement('div'),
   node: (propName) => propName || 'node',
   symbol: (propName) => Symbol(propName),
 
