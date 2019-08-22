@@ -62,7 +62,8 @@ const GENERATORS = {
   objectOf: (propName, type) => ({ key: generateOneProp(type, propName, false) }),
   oneOf: (propName, values) => _.first(values),
   oneOfType: (propName, types) => forceGenerateOneProp(_.first(types), propName),
-  shape: (propName, shape) => generateProps(shape, options)
+  shape: (propName, shape) => generateProps(shape, options),
+  exact: (propName, shape) => generateProps(shape, options)
 }
 
 const shouldGenerate = (propType) => {
