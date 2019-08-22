@@ -534,6 +534,76 @@ describe('generateProps (correct)', () => {
       })
     })
   })
+
+  describe('given a required exact', () => {
+    describe('with a required array value', () => {
+      it('generates an object with an array value', () => {
+        if (!PropTypes.exact) return
+
+        const propTypes = { myExact: PropTypes.exact({ myArray: PropTypes.array.isRequired }).isRequired }
+        ComponentAsClass.propTypes = propTypes
+        ComponentAsFunction.propTypes = propTypes
+
+        const expected = { myExact: { myArray: ['myArray'] } }
+
+        generateProps(propTypes).should.deep.equal(expected)
+        generateProps({ propTypes }).should.deep.equal(expected)
+        generateProps(ComponentAsClass).should.deep.equal(expected)
+        generateProps(ComponentAsFunction).should.deep.equal(expected)
+        generateProps(propTypes.myExact).should.deep.equal(expected.myExact)
+      })
+
+      describe('and a required bool', () => {
+        it('generates an object with an array value and a bool value', () => {
+          if (!PropTypes.exact) return
+
+          const propTypes = {
+            myExact: PropTypes.exact({
+              myArray: PropTypes.array.isRequired,
+              myBool: PropTypes.bool.isRequired
+            }).isRequired
+          }
+          ComponentAsClass.propTypes = propTypes
+          ComponentAsFunction.propTypes = propTypes
+
+          const expected = { myExact: { myArray: ['myArray'], myBool: true } }
+
+          generateProps(propTypes).should.deep.equal(expected)
+          generateProps({ propTypes }).should.deep.equal(expected)
+          generateProps(ComponentAsClass).should.deep.equal(expected)
+          generateProps(ComponentAsFunction).should.deep.equal(expected)
+          generateProps(propTypes.myExact).should.deep.equal(expected.myExact)
+        })
+      })
+
+      describe('and a required shape', () => {
+        describe('with a required number', () => {
+          it('generates an object with an array value and a sub-object with bool value', () => {
+            if (!PropTypes.exact) return
+
+            const propTypes = {
+              myExact: PropTypes.exact({
+                myArray: PropTypes.array.isRequired,
+                mySubShape: PropTypes.shape({
+                  myNumber: PropTypes.number.isRequired
+                }).isRequired
+              }).isRequired
+            }
+            ComponentAsClass.propTypes = propTypes
+            ComponentAsFunction.propTypes = propTypes
+
+            const expected = { myExact: { myArray: ['myArray'], mySubShape: { myNumber: 1 } } }
+
+            generateProps(propTypes).should.deep.equal(expected)
+            generateProps({ propTypes }).should.deep.equal(expected)
+            generateProps(ComponentAsClass).should.deep.equal(expected)
+            generateProps(ComponentAsFunction).should.deep.equal(expected)
+            generateProps(propTypes.myExact).should.deep.equal(expected.myExact)
+          })
+        })
+      })
+    })
+  })
 })
 
 describe('generateProps(opts)', () => {
