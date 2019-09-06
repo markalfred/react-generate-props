@@ -148,7 +148,7 @@ describe('generateProps (correct)', () => {
       ComponentAsClass.propTypes = propTypes
       ComponentAsFunction.propTypes = propTypes
 
-      const expected = { myElement: React.createElement('div', 'myElement') }
+      const expected = { myElement: React.createElement('div') }
 
       generateProps(propTypes).should.deep.equal(expected)
       generateProps({ propTypes }).should.deep.equal(expected)
@@ -633,7 +633,7 @@ describe('generateProps(opts)', () => {
     requiredObject: { requiredObject: 'requiredObject' },
     requiredString: 'requiredString',
     requiredAny: 'requiredAny',
-    requiredElement: React.createElement('div', 'requiredElement'),
+    requiredElement: React.createElement('div'),
     requiredNode: 'requiredNode'
   }
 
@@ -644,7 +644,7 @@ describe('generateProps(opts)', () => {
     optionalObject: { optionalObject: 'optionalObject' },
     optionalString: 'optionalString',
     optionalAny: 'optionalAny',
-    optionalElement: React.createElement('div', 'optionalElement'),
+    optionalElement: React.createElement('div'),
     optionalNode: 'optionalNode'
   }
 
