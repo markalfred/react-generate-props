@@ -11,7 +11,8 @@
     "src/*"
   ],
   "dependencies": {
-    "lodash": "^4.13.1"
+    "lodash": "^4.13.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -44,7 +45,9 @@
     "react:with-prop-types": "npm run react:14 && mocha && npm run react:15 && mocha && npm run react:16 && mocha",
     "react:14": "npm run react:clean && npm i --no-save --no-progress react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
     "react:15": "npm run react:clean && npm i --no-save --no-progress react@15 react-dom@15 react-addons-test-utils@15",
-    "react:16": "npm run react:clean && npm i --no-save --no-progress react@16 prop-types"
+    "react:16": "npm run react:clean && npm i --no-save --no-progress react@16 prop-types",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -63,5 +66,6 @@
   "bugs": {
     "url": "https://github.com/markalfred/react-generate-props/issues"
   },
-  "homepage": "https://github.com/markalfred/react-generate-props#readme"
+  "homepage": "https://github.com/markalfred/react-generate-props#readme",
+  "snyk": true
 }
